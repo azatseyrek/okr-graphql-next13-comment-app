@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-size: 16px;
+  color: aliceblue;
+  margin: auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr min(96%, 1440px) 1fr;
+  grid-template-rows: 96px auto 72px;
+}
+
+.container > * {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.container > .fluid {
+  grid-column: 1 / -1 !important;
+}
+
+a {
+  transition: opacity 0.2s ease-in-out;
+}
+a:hover {
+  opacity: 0.6;
+}

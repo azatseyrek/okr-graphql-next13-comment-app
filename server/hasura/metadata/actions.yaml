@@ -1,0 +1,10 @@
+actions: []
+custom_types:
+  enums: []
+  input_objects:
+    - name: RegisterInput
+    - name: LoginInput
+  objects:
+    - name: RegisterOutput
+    - name: SampleOutput
+  scalars: []
