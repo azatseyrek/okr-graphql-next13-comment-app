@@ -6,6 +6,7 @@ import Header from '@/components/header/Header';
 import { roboto } from '@/fonts';
 import '@/styles/globals.css';
 import '@/styles/reset.css';
+import Providers from '@/utils/provider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.className} container`}>
-        <Header />
-        <main className="hero">{children}</main>
-        <Footer />
+        <Providers>
+          <Header />
+          <main className="hero">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

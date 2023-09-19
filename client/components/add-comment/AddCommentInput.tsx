@@ -2,17 +2,26 @@ import React from 'react';
 
 import { GiQuillInk } from 'react-icons/gi';
 
-const AddCommentInput = () => {
+interface IProps {
+  postId: number;
+}
+
+const AddCommentInput = (props: IProps) => {
   return (
-    <div className="relative flex flex-col gap-2">
+    <div className="flex flex-col gap-2">
       <textarea
-        className="textarea textarea-neutral border-neutral text-md w-full border-4"
+        className="textarea textarea-neutral border-secondary text-lg w-full border-4 resize-none"
         rows={4}
-        maxLength={500}
-        placeholder="Write a comment"
+        maxLength={300}
+        placeholder="Your comment..."
       ></textarea>
-      <button className="btn btn-neutral absolute bottom-2 right-2 self-end">
-        Add Comment
+      <button
+        onClick={() => {
+          console.log(props.postId);
+        }}
+        className="btn btn-neutral w-32 self-end"
+      >
+        Send
         <GiQuillInk siz={32} />
       </button>
     </div>
