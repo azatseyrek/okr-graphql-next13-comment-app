@@ -13,7 +13,7 @@ const Header = () => {
         <Link href="/" className="flex items-center justify-center gap-2">
           <SiGraphql size={60} color="#b01280" className="text-white" />
           <span
-            className={`uppercase ${teko.className} text-4xl text-[#e7c3de]`}
+            className={`uppercase ${teko.className} text-lg lg:text-3xl text-[#e7c3de]`}
           >
             Code.Grow.Inspire
           </span>
@@ -25,14 +25,12 @@ const Header = () => {
             tabIndex={0}
             className="btn btn-ghost btn-circle avatar h-16 w-16"
           >
-            <div className="mx-auto w-16 rounded-full">
-              <Image
-                src="/assets/azatseyrek.jpg"
-                alt="azat"
-                width={450}
-                height={450}
-              />
-            </div>
+            <Image
+              width={64}
+              height={64}
+              alt="user"
+              src="/assets/defaultProfilePicture.png"
+            />
           </label>
           <ul
             tabIndex={0}

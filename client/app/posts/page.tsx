@@ -1,18 +1,19 @@
 'use client';
 
+import AddNewPost from '@/components/add-post/AddNewPost';
 import PostCard from '@/components/post-card/PostCard';
 import { IPost } from '@/components/post-card/types';
 import { teko } from '@/fonts';
-import { GET_ALL_POSTS } from '@/graphql/queries';
-import { useQuery } from '@apollo/client';
+import { GET_ALL_POSTS_SUBSC } from '@/graphql/subscriptions';
+import { useSubscription } from '@apollo/client';
 
 const PostPage = () => {
-  const { data, loading } = useQuery(GET_ALL_POSTS);
+  const { data, loading } = useSubscription(GET_ALL_POSTS_SUBSC);
 
   console.log(data);
 
   if (loading) {
-    return <div>loading...</div>;
+    return <span className="loading loading-ring loading-lg" />;
   }
 
   return (
@@ -22,10 +23,9 @@ const PostPage = () => {
       >
         post page
       </h1>
+      <AddNewPost />
 
       {data?.posts?.map((p: IPost) => <PostCard key={p.id} post={p} />)}
-
-      <div className="flex w-full flex-col items-center gap-y-4  "></div>
     </main>
   );
 };
