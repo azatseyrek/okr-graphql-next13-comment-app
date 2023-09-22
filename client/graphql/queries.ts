@@ -24,3 +24,11 @@ export const GET_ALL_POSTS = gql`
     }
   }
 `;
+
+export const IS_USER_EXIST = gql`
+  query isUserExist($email: String!) {
+    users(where: { email: { _eq: $email } }) {
+      id
+    }
+  }
+`;

@@ -18,13 +18,22 @@ export const INSERT_COMMENT_MUTATION = gql`
   }
 `;
 
-
 export const INSERT_POST_MUTATION = gql`
   mutation AddPost($description: String!, $user_id: Int!) {
-    insert_posts_one(
-      object: { description: $description,  user_id: $user_id }
-    ) {
+    insert_posts_one(object: { description: $description, user_id: $user_id }) {
       description
+    }
+  }
+`;
+
+export const REGISTER_USER_MUTATION = gql`
+  mutation Register($email: String!, $fullName: String!, $password: String!) {
+    insert_users_one(
+      object: { email: $email, fullName: $fullName, password: $password }
+    ) {
+      id
+      email
+      fullName
     }
   }
 `;
