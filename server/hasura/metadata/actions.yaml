@@ -1,10 +1,23 @@
-actions: []
+actions:
+  - name: Login
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_BASE_ENDPOINT}}/api/authentication/login'
+      forward_client_headers: true
+  - name: Register
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_BASE_ENDPOINT}}/api/authentication/register'
+      forward_client_headers: true
 custom_types:
   enums: []
   input_objects:
     - name: RegisterInput
     - name: LoginInput
+    - name: SampleInput
+    - name: SampleInputRegister
   objects:
     - name: RegisterOutput
     - name: SampleOutput
+    - name: SampleOutputRegister
   scalars: []

@@ -1,3 +1,15 @@
+type Mutation {
+  Login(
+    data: SampleInput!
+  ): SampleOutput
+}
+
+type Mutation {
+  Register(
+    data: SampleInputRegister!
+  ): SampleOutputRegister
+}
+
 input RegisterInput {
   email: String!
   password: String!
@@ -10,11 +22,26 @@ input LoginInput {
   password: String!
 }
 
+input SampleInput {
+  email: String!
+  password: String!
+}
+
+input SampleInputRegister {
+  email: String!
+  fullName: String!
+  password: String!
+}
+
 type RegisterOutput {
   accessToken: String!
 }
 
 type SampleOutput {
+  accessToken: String!
+}
+
+type SampleOutputRegister {
   accessToken: String!
 }
 
