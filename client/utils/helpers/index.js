@@ -26,7 +26,7 @@ export const signAccessToken = (user) => {
     const payload = {
       'https://hasura.io/jwt/claims': {
         'x-hasura-allowed-roles': ['user'],
-        'x-hasura-default-roles': 'user',
+        'x-hasura-default-role': 'user',
         'x-hasura-user-id': user.id.toString(),
       },
       email: user.email,
@@ -42,6 +42,18 @@ export const signAccessToken = (user) => {
         reject('jwt sign error', err);
       } else {
         resolve(token);
+      }
+    });
+  });
+};
+
+export const verifyToken = (token, secret) => {
+  return new Promise((resolve, reject) => {
+    JWT.verify(token, secret, (err, decoded) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(decoded);
       }
     });
   });

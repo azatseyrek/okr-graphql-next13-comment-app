@@ -32,3 +32,19 @@ export const IS_USER_EXIST = gql`
     }
   }
 `;
+
+export const LOGIN_USER_QUERY = gql`
+  query ($email: String!) {
+    users(where: { email: { _eq: $email } }, limit: 1) {
+      id
+      password
+      email
+    }
+  }
+`;
+
+// export const GET_ME_QUERY = gql`
+// Me{
+//   user_id
+// }
+// `

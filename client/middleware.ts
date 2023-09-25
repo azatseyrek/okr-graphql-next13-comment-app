@@ -1,4 +1,3 @@
-import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
 export default async function middleware(req: NextRequest) {
@@ -10,15 +9,15 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const session = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
+  // const session = await getToken({
+  //   req,
+  //   secret: process.env.NEXTAUTH_SECRET,
+  // });
 
-  if (!session && path === '/posts') {
-    return NextResponse.redirect(new URL('auth/login', req.url));
-  } else if (session && (path === 'auth/login' || path === 'auth/register')) {
-    return NextResponse.redirect(new URL('/posts', req.url));
-  }
+  // if (!session && path === '/posts') {
+  //   return NextResponse.redirect(new URL('auth/login', req.url));
+  // } else if (session && (path === 'auth/login' || path === 'auth/register')) {
+  //   return NextResponse.redirect(new URL('/posts', req.url));
+  // }
   return NextResponse.next();
 }

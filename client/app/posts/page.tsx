@@ -8,9 +8,9 @@ import { GET_ALL_POSTS_SUBSC } from '@/graphql/subscriptions';
 import { useSubscription } from '@apollo/client';
 
 const PostPage = () => {
-  const { data, loading } = useSubscription(GET_ALL_POSTS_SUBSC);
+  const { data, loading, error } = useSubscription(GET_ALL_POSTS_SUBSC);
 
-  console.log(data);
+  console.log(error);
 
   if (loading) {
     return <span className="loading loading-ring loading-lg" />;

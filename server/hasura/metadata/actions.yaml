@@ -4,6 +4,14 @@ actions:
       kind: synchronous
       handler: '{{ACTION_BASE_ENDPOINT}}/api/authentication/login'
       forward_client_headers: true
+  - name: Me
+    definition:
+      kind: ""
+      handler: '{{ACTION_BASE_ENDPOINT}}/api/authentication/me'
+      forward_client_headers: true
+    permissions:
+      - role: user
+      - role: anonymous
   - name: Register
     definition:
       kind: synchronous
@@ -20,4 +28,5 @@ custom_types:
     - name: RegisterOutput
     - name: SampleOutput
     - name: SampleOutputRegister
+    - name: MeOutput
   scalars: []

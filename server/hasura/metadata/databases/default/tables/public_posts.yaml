@@ -13,3 +13,32 @@ array_relationships:
         table:
           name: comments
           schema: public
+insert_permissions:
+  - role: anonymous
+    permission:
+      check: {}
+      columns:
+        - id
+        - user_id
+        - description
+        - created_at
+    comment: ""
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - id
+        - user_id
+        - description
+        - created_at
+    comment: ""
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - id
+        - user_id
+        - description
+        - created_at
+      filter: {}
+    comment: ""

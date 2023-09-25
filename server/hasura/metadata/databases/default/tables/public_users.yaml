@@ -16,3 +16,52 @@ array_relationships:
         table:
           name: posts
           schema: public
+insert_permissions:
+  - role: anonymous
+    permission:
+      check: {}
+      columns:
+        - id
+        - email
+        - fullName
+        - password
+    comment: ""
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - id
+        - email
+        - fullName
+        - password
+    comment: ""
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - id
+        - email
+        - fullName
+        - password
+      filter: {}
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - id
+        - email
+        - fullName
+        - password
+      filter: {}
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - email
+        - fullName
+        - password
+      filter: {}
+      check: {}
+    comment: ""

@@ -4,6 +4,10 @@ type Mutation {
   ): SampleOutput
 }
 
+type Query {
+  Me: MeOutput
+}
+
 type Mutation {
   Register(
     data: SampleInputRegister!
@@ -43,5 +47,9 @@ type SampleOutput {
 
 type SampleOutputRegister {
   accessToken: String!
+}
+
+type MeOutput {
+  user_id: String!
 }
 
