@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { COOKIE_NAME } from '@/constants';
 import { LOGIN_USER_QUERY } from '@/graphql/queries';
 import Hasura from '@/utils/clients/hasura';
 import { signAccessToken } from '@/utils/helpers';
 import bcrypt from 'bcrypt';
+import { serialize } from 'cookie';
 
 interface IUser {
   id: string;
@@ -55,7 +57,23 @@ export const POST = async (request: NextRequest) => {
 
     const accessToken = await signAccessToken(user);
 
-    return NextResponse.json({ accessToken });
+    const serialized = serialize(COOKIE_NAME, accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 60 * 60 * 24,
+      path: '/',
+    });
+
+    return NextResponse.json(
+      { accessToken },
+      {
+        status: 200,
+        headers: {
+          'Set-Cookie': serialized,
+        },
+      },
+    );
   } catch (error) {
     console.error('An error occurred:', error);
     return NextResponse.json(

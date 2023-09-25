@@ -42,3 +42,12 @@ select_permissions:
         - created_at
       filter: {}
     comment: ""
+  - role: user
+    permission:
+      columns:
+        - id
+        - user_id
+        - description
+        - created_at
+      filter: {}
+    comment: ""

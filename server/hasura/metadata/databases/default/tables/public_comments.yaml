@@ -50,3 +50,26 @@ select_permissions:
         - created_at
       filter: {}
     comment: ""
+update_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - id
+        - post_id
+        - user_id
+        - comment
+        - created_at
+      filter: {}
+      check: null
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - id
+        - post_id
+        - user_id
+        - comment
+        - created_at
+      filter: {}
+      check: null
+    comment: ""

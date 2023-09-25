@@ -9,6 +9,12 @@ const wsLink = new WebSocketLink({
   uri: `ws://localhost:8080/v1/graphql`,
   options: {
     reconnect: true,
+    connectionParams: {
+      headers: {
+        'x-hasura-admin-secret': 'myadminsecretkey',
+        // Authorization: 'Bearer ${authToken}',
+      },
+    },
   },
 });
 

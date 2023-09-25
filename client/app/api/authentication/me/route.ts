@@ -27,7 +27,7 @@ export const POST = async (request: NextRequest) => {
     return NextResponse.json('No token provided', { status: 401 });
   }
 
-  const token = authHeader.split(' ')[1]; // Token'i doğru şekilde alın
+  const token = authHeader.split(' ')[1];
   if (token) {
     try {
       const decoded = (await verifyToken(

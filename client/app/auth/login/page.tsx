@@ -1,8 +1,46 @@
 'use client';
 
+import { FormEvent } from 'react';
+
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+import axios, { AxiosError } from 'axios';
+import { parse } from 'cookie';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+  const cookie = parse('OutSiteJwt');
+
+  console.log(cookie);
+
+  const router = useRouter();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const email = e.currentTarget.email.value;
+    const password = e.currentTarget.password.value;
+
+    const payload = {
+      input: {
+        data: {
+          email,
+          password,
+        },
+      },
+    };
+
+    try {
+      const res = await axios.post('/api/authentication/login', payload);
+      const data = res.data;
+      toast.success('Success! You are redirecting ... ');
+
+      setTimeout(() => {
+        router.push('/posts');
+      }, 1000);
+    } catch (e) {
+      toast.error('User not found !');
+    }
+  };
   return (
     <div className="hero">
       <div className="hero-content flex-col lg:flex-row-reverse w-[75%]">
@@ -12,7 +50,10 @@ const Login = () => {
             Unlock a world of possibilities – Log in and explore!
           </p>
         </div>
-        <div className="card w-full max-w-sm shadow-2xl min-w-[325px]">
+        <form
+          onSubmit={handleSubmit}
+          className="card w-full max-w-sm shadow-2xl min-w-[325px]"
+        >
           <div className="card-body">
             <div className="form-control">
               <label className="label">
@@ -20,8 +61,10 @@ const Login = () => {
               </label>
               <input
                 type="text"
+                name="email"
                 placeholder="email"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -31,7 +74,9 @@ const Login = () => {
               <input
                 type="text"
                 placeholder="password"
+                name="password"
                 className="input input-bordered"
+                required
               />
               <label className="label">
                 <Link
@@ -46,7 +91,7 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

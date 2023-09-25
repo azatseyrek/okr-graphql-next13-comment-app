@@ -29,4 +29,13 @@ custom_types:
     - name: SampleOutput
     - name: SampleOutputRegister
     - name: MeOutput
+      relationships:
+        - field_mapping:
+            user_id: id
+          name: user
+          remote_table:
+            name: users
+            schema: public
+          source: default
+          type: object
   scalars: []
