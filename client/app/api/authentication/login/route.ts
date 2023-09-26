@@ -11,7 +11,7 @@ interface IUser {
   id: string;
   password: string;
   email: string;
-  fullName: string
+  fullName: string;
 }
 
 export const POST = async (request: NextRequest) => {

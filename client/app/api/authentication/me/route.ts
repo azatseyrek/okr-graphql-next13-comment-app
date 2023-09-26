@@ -21,8 +21,6 @@ interface IDecoded {
 export const POST = async (request: NextRequest) => {
   const authHeader = request.headers.get('authorization');
 
-  console.log('-----This is auth header-----', authHeader);
-
   if (!authHeader) {
     return NextResponse.json('No token provided', { status: 401 });
   }
