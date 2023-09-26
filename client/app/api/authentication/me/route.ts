@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { verifyToken } from '@/utils/helpers';
-import JWT from 'jsonwebtoken';
 
 interface HasuraClaims {
   'x-hasura-allowed-roles': string[];
@@ -12,6 +11,7 @@ interface HasuraClaims {
 interface IDecoded {
   'https://hasura.io/jwt/claims': HasuraClaims;
   email: string;
+  fullName: string;
   iat: number;
   exp: number;
   aud: string;
@@ -36,6 +36,7 @@ export const POST = async (request: NextRequest) => {
       )) as IDecoded;
       return NextResponse.json({
         user_id: decoded.aud,
+        fullName: decoded.fullName,
       });
     } catch (error) {
       console.error('JWT verification error:', error);

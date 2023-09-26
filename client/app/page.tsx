@@ -1,6 +1,12 @@
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 
+import { COOKIE_NAME } from '@/constants';
+
 export default function Home() {
+  const cookieStore = cookies();
+  const cookie = cookieStore.get(COOKIE_NAME);
+
   return (
     <div className="hero-content text-center">
       <div className="max-w-2xl">
@@ -10,9 +16,15 @@ export default function Home() {
           with others, and share your insights. It's time to log in and let your
           voice be heard.
         </p>
-        <Link href="/auth/login" className="btn w-40 text-md btn-primary">
-          login
-        </Link>
+        {!cookie ? (
+          <Link href="/auth/login" className="btn w-40 text-md btn-primary">
+            login
+          </Link>
+        ) : (
+          <Link href="/posts" className="btn w-40 text-md btn-primary">
+            posts
+          </Link>
+        )}
       </div>
     </div>
   );

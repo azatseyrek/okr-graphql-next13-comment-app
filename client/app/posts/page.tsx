@@ -1,16 +1,17 @@
 'use client';
 
-import { cookies } from 'next/headers';
-
 import AddNewPost from '@/components/add-post/AddNewPost';
 import PostCard from '@/components/post-card/PostCard';
 import { IPost } from '@/components/post-card/types';
-import { COOKIE_NAME } from '@/constants';
+
 import { teko } from '@/fonts';
 import { GET_ALL_POSTS_SUBSC } from '@/graphql/subscriptions';
 import { useSubscription } from '@apollo/client';
 
 const PostPage = () => {
+
+
+
   const { data, loading } = useSubscription(GET_ALL_POSTS_SUBSC);
 
   if (loading) {

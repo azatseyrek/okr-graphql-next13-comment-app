@@ -1,19 +1,12 @@
 'use client';
 
-import { FormEvent } from 'react';
-
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import axios, { AxiosError } from 'axios';
-import { parse } from 'cookie';
+import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const Login = () => {
-  const cookie = parse('OutSiteJwt');
-
-  console.log(cookie);
-
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,16 +24,33 @@ const Login = () => {
 
     try {
       const res = await axios.post('/api/authentication/login', payload);
-      const data = res.data;
-      toast.success('Success! You are redirecting ... ');
+      const data = await res.data;
 
-      setTimeout(() => {
-        router.push('/posts');
-      }, 1000);
+      console.log(data.accessToken);
+
+      const whoAmI = await axios.post(
+        '/api/authentication/me',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${data.accessToken}`,
+            'x-hasura-admin-secret': 'myadminsecretkey',
+          },
+        },
+      );
+
+      // set whoAmI to localstroge
+      console.log(whoAmI.data);
+
+      localStorage.setItem('me', JSON.stringify(whoAmI.data));
+
+      toast.success('Success! You are redirecting ... ');
+      router.push('/posts');
     } catch (e) {
       toast.error('User not found !');
     }
   };
+
   return (
     <div className="hero">
       <div className="hero-content flex-col lg:flex-row-reverse w-[75%]">
@@ -72,7 +82,7 @@ const Login = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="password"
                 name="password"
                 className="input input-bordered"

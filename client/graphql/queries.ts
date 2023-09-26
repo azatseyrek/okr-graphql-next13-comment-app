@@ -39,12 +39,16 @@ export const LOGIN_USER_QUERY = gql`
       id
       password
       email
+      fullName
     }
   }
 `;
 
-// export const GET_ME_QUERY = gql`
-// Me{
-//   user_id
-// }
-// `
+export const GET_ME_QUERY = gql`
+  query {
+    user_id
+    user {
+      fullName
+    }
+  }
+`;

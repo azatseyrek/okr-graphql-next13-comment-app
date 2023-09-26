@@ -1,8 +1,41 @@
+'use client';
+
 import React from 'react';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const Register = () => {
+  const router = useRouter();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const email = e.currentTarget.email.value;
+    const password = e.currentTarget.password.value;
+    const fullName = e.currentTarget.fullName.value;
+
+    const payload = {
+      input: {
+        data: {
+          email,
+          password,
+          fullName,
+        },
+      },
+    };
+
+    try {
+      await axios.post('/api/authentication/register', payload);
+
+      toast.success('Created! You are redirecting ... ');
+      router.push('/auth/login');
+    } catch (e) {
+      toast.error('User not found !');
+    }
+  };
+
   return (
     <div className="hero">
       <div className="hero-content flex-col lg:flex-row-reverse w-[75%]">
@@ -12,7 +45,10 @@ const Register = () => {
             Unlock a world of possibilities – Register and explore!
           </p>
         </div>
-        <div className="card w-full max-w-sm shadow-2xl min-w-[325px]">
+        <form
+          onSubmit={handleSubmit}
+          className="card w-full max-w-sm shadow-2xl min-w-[325px]"
+        >
           <div className="card-body">
             <div className="form-control">
               <label className="label">
@@ -20,8 +56,10 @@ const Register = () => {
               </label>
               <input
                 type="text"
+                name="email"
                 placeholder="email"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -30,8 +68,10 @@ const Register = () => {
               </label>
               <input
                 type="text"
+                name="fullName"
                 placeholder="full name"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -39,9 +79,11 @@ const Register = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="password"
+                name="password"
                 className="input input-bordered"
+                required
               />
               <label className="label">
                 <Link
@@ -56,7 +98,7 @@ const Register = () => {
               <button className="btn btn-secondary">Register</button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

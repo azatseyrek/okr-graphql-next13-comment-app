@@ -18,14 +18,21 @@ const AddCommentInput = (props: IProps) => {
   const [commentText, setCommentText] = useState<string>('');
   const [addComment] = useMutation(INSERT_COMMENT_MUTATION);
 
+  const user = localStorage.getItem('me')
+    ? JSON.parse(localStorage.getItem('me') as string)
+    : null;
+
   const handleSendComment = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const comment = commentText;
     const post_id = postId;
-    const user_id = 2; // change it with authenticated user from context
+    const user_id = user.user_id; // change it with authenticated user from context
 
     try {
+      if (commentText === '') {
+        return;
+      }
       const { data } = await addComment({
         variables: { comment, post_id, user_id },
       });

@@ -8,13 +8,20 @@ const AddNewPost = () => {
   const [postText, setPostText] = useState<string>('');
   const [addComment] = useMutation(INSERT_POST_MUTATION);
 
+  const user = localStorage.getItem('me')
+    ? JSON.parse(localStorage.getItem('me') as string)
+    : null;
+
   const handleSendPost = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const description = postText;
-    const user_id = 2; // change it with authenticated user from context
+    const user_id = user.user_id; // change it with authenticated user from context
 
     try {
+      if (postText === '') {
+        return;
+      }
       const { data } = await addComment({
         variables: { description, user_id },
       });

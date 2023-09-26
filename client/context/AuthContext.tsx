@@ -3,7 +3,7 @@ import React, { ReactNode, createContext, useContext, useState } from 'react';
 
 // Kullanıcı bilgileri için bir arayüz oluşturun
 interface User {
-  username: string;
+  fullName: string;
 }
 
 // Bağlamı oluşturun
