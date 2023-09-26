@@ -22,7 +22,6 @@ export const formatRelativeDate = (dateString) => {
 };
 
 export const signAccessToken = (user) => {
-  console.log('this is user from sign accessToken --->', user);
   return new Promise((resolve, reject) => {
     const payload = {
       'https://hasura.io/jwt/claims': {
@@ -31,7 +30,7 @@ export const signAccessToken = (user) => {
         'x-hasura-user-id': user.id.toString(),
       },
       email: user.email,
-      fullName: user.fullName
+      fullName: user.fullName,
     };
     const options = {
       expiresIn: '1h',

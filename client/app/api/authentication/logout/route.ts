@@ -5,12 +5,11 @@ import { serialize } from 'cookie';
 
 export const POST = async () => {
   try {
-    // Çerez silme işlemi
     const serialized = serialize(COOKIE_NAME, '', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 0, // Çerezin hemen sona ermesini sağlar
+      maxAge: 0,
       path: '/',
     });
 

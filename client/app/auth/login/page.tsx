@@ -26,8 +26,6 @@ const Login = () => {
       const res = await axios.post('/api/authentication/login', payload);
       const data = await res.data;
 
-      console.log(data.accessToken);
-
       const whoAmI = await axios.post(
         '/api/authentication/me',
         {},
